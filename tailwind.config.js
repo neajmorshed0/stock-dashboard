@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  darkMode: "class",
   theme: {
     fontFamily: { sans: ['"Outfit", sans-serif'] },
     extend: {
       colors: {
         primary: {
+          100: "#ECF3FF",
           500: "#465FFF",
           600: "#3641f5",
         },
@@ -42,5 +44,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
     require("@tailwindcss/aspect-ratio"),
+    require("tailwind-scrollbar"),
   ],
 };

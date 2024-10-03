@@ -1,9 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import React from "react";
-import { Chart as ApexCharts } from "react-apexcharts";
+// import { Chart as ApexCharts } from "react-apexcharts";
 
-pexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
+const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function DividendChart() {
   const chartOptions = {

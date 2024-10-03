@@ -1,3 +1,4 @@
+import AppLayout from "@/components/Layout/AppLayout";
 import "./globals.css";
 import "swiper/css";
 
@@ -9,7 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppLayout>{children}</AppLayout>
+      </body>
     </html>
   );
 }

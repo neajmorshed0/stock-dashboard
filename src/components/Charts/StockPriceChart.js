@@ -175,7 +175,7 @@ const StockPriceChart = () => {
     yaxis: {
       opposite: false,
       labels: {
-        formatter: (value) => `${value / 1000}K`,
+        formatter: (value) => `${value / 1}K`,
         style: {
           colors: "#344054",
           fontSize: "12px",
@@ -230,7 +230,7 @@ const StockPriceChart = () => {
 
   return (
     <Card id="chart">
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-col justify-between gap-5 sm:items-center sm:flex-row">
         <div>
           <h2 className="text-lg font-semibold text-secondary-500">
             Portfolio Performance
@@ -239,7 +239,7 @@ const StockPriceChart = () => {
             Here is your performance stats of each month
           </p>
         </div>
-        <div className=" flex p-0.5 space-x-2 rounded-lg bg-theme-gray-500">
+        <div className="grid grid-cols-3 p-0.5 space-x-2 rounded-lg bg-theme-gray-500">
           {timeframes.map(({ label, value }) => (
             <button
               key={value}

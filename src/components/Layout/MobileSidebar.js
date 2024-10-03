@@ -1,34 +1,22 @@
 import { SidebarContext } from "@/context/SidebarContext";
 import { Transition, TransitionChild } from "@headlessui/react";
 import React, { Fragment, useContext } from "react";
-import SidebarNav from "./SidebarNav";
-import {
-  RiArrowRightSLine,
-  RiCloseFill,
-  RiExpandUpDownLine,
-  RiHeadphoneLine,
-  RiSettings2Line,
-  RiVerifiedBadgeFill,
-} from "@remixicon/react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Typography from "../Typography";
-
-const menuItems = [
-  {
-    path: "/settings",
-    label: "Settings",
-    icon: <RiSettings2Line size={20} />,
-  },
-  {
-    path: "/support",
-    label: "Support",
-    icon: <RiHeadphoneLine size={20} />,
-  },
-];
 
 export default function MobileSidebar() {
-  const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(true); //
+  const handleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+  const [isOpen, setIsOpen] = useState(true); // Track the submenu state
+
+  // Function to handle the submenu toggle
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   let pathname = usePathname();
 
   // const isActive = (path) => path === pathname;
@@ -47,10 +35,14 @@ export default function MobileSidebar() {
         <div className="relative z-50">
           <div
             className="fixed inset-0 z-30 bg-black/40"
-            onClick={closeSidebar}
+            onClick={handleMobileSidebar}
           />
           <div className="absolute top-0 z-40 flex justify-center left-[272px]">
-            <button type="button" className="p-2.5" onClick={closeSidebar}>
+            <button
+              type="button"
+              className="p-2.5"
+              onClick={handleMobileSidebar}
+            >
               <RiCloseFill className="w-6 h-6 text-white" aria-hidden="true" />
             </button>
           </div>
@@ -66,163 +58,104 @@ export default function MobileSidebar() {
         leaveFrom="translate-x-0"
         leaveTo="-translate-x-full"
       >
-        <aside className="flex-col fixed inset-y-0  w-[272px] min-h-screen z-50 overflow-y-auto bg-white  border-r border-soft-200">
-          <div className="flex flex-col justify-between min-h-screen">
+        <aside
+          className={`fixed xl:block left-0 ${
+            isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }  bg-white xl:w-[290px] hidden border-r border-[#E4E7EC]`}
+        >
+          <div className="flex flex-col justify-between min-h-screen px-5 pt-8 pb-5">
             {/* Top */}
-            <div className="px-5">
-              <div className="flex items-center justify-between pt-6 pb-5 bg-white border-b border-soft-200">
-                <div className="flex items-center gap-3">
-                  <Link
-                    href="/"
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-full "
-                  >
-                    <svg
-                      className="size-10"
-                      width="160"
-                      height="158"
-                      viewBox="0 0 160 158"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect width="160" height="158" rx="79" fill="#335CFF" />
-                      <rect
-                        width="72.5759"
-                        height="72.5759"
-                        rx="13.3333"
-                        transform="matrix(0.965916 -0.258855 -0.258855 0.965916 63.231 62.2227)"
-                        fill="url(#paint0_linear_836_1309)"
-                        fillOpacity="0.48"
-                      />
-                      <rect
-                        width="72.5759"
-                        height="72.5759"
-                        rx="13.3333"
-                        transform="matrix(0.965916 -0.258855 -0.258855 0.965916 45.4536 44.4443)"
-                        fill="url(#paint1_linear_836_1309)"
-                        fillOpacity="0.8"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_836_1309"
-                          x1="36.2879"
-                          y1="0"
-                          x2="36.2879"
-                          y2="72.5759"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stopColor="white" />
-                          <stop offset="1" stopColor="white" />
-                        </linearGradient>
-                        <linearGradient
-                          id="paint1_linear_836_1309"
-                          x1="36.2879"
-                          y1="0"
-                          x2="36.2879"
-                          y2="72.5759"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stopColor="white" />
-                          <stop offset="1" stopColor="white" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </Link>
-                  <div>
-                    <h4 className="mb-1 text-sm font-medium leading-5 text-strong-950">
-                      Apex
-                    </h4>
-                    <p className="text-xs leading-4 text-sub-600">
-                      Finance & Banking
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <button className="border rounded-md cursor-pointer p-0.5 size-6 inline-flex items-center justify-center shadow-custom-xs">
-                    <RiExpandUpDownLine size={16} />
-                  </button>
-                </div>
-              </div>
+            <div className="">
+              <Link href="/">
+                <img src="/images/logo/logo-black.svg" alt="" />
+              </Link>
             </div>
             {/* Menu */}
-            <div className="flex-1 space-y-5">
-              <div className="pt-5 h-[285px] overflow-y-auto">
-                <span className="px-5 text-xs font-medium uppercase text-soft-400">
+            <div className="flex-1 pt-7">
+              <div className="">
+                <span className="text-xs uppercase text-theme-gray-400">
                   Main
                 </span>
-                <SidebarNav />
-              </div>
-              {/* Bottom Menu */}
-              <div>
-                <span className="p-1 px-5 text-xs font-medium uppercase text-soft-400">
-                  others
-                </span>
-                <ul className="px-5 mt-2 space-y-1">
-                  {menuItems.map((nav) => (
-                    <li key={nav.path}>
-                      <Link
-                        href={nav.path}
-                        className={`flex relative items-center gap-2 px-3 py-2 text-sm font-medium transition rounded-lg hover:bg-weak-50 after:transition after:h-5 after:w-1 after:bg-primary-base after:absolute after:rounded-r after:left-0 after:translate-x-[-20px] after:top-1/2 after:-translate-y-1/2 ${
-                          isActive(nav.path)
-                            ? "text-strong-950 bg-weak-50 after:visible"
-                            : "text-sub-600 bg-transparent after:invisible"
-                        }`}
+                <nav className="pt-4">
+                  <ul>
+                    <li>
+                      <button
+                        className="flex items-center w-full gap-3 px-3 py-2 text-sm font-medium text-secondary-300"
+                        onClick={handleToggle}
                       >
-                        {/* Icon */}
-                        <span
-                          className={`${
-                            isActive(nav.path)
-                              ? "text-primary-base"
-                              : "text-sub-600"
-                          }`}
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          {nav.icon}
-                        </span>
-                        {/* Label */}
-                        <span>{nav.label}</span>
-                      </Link>
+                          <path
+                            fill-rule="evenodd"
+                            clipRule="evenodd"
+                            d="M5.5 3.25C4.25736 3.25 3.25 4.25736 3.25 5.5V8.99998C3.25 10.2426 4.25736 11.25 5.5 11.25H9C10.2426 11.25 11.25 10.2426 11.25 8.99998V5.5C11.25 4.25736 10.2426 3.25 9 3.25H5.5ZM4.75 5.5C4.75 5.08579 5.08579 4.75 5.5 4.75H9C9.41421 4.75 9.75 5.08579 9.75 5.5V8.99998C9.75 9.41419 9.41421 9.74998 9 9.74998H5.5C5.08579 9.74998 4.75 9.41419 4.75 8.99998V5.5ZM5.5 12.75C4.25736 12.75 3.25 13.7574 3.25 15V18.5C3.25 19.7426 4.25736 20.75 5.5 20.75H9C10.2426 20.75 11.25 19.7427 11.25 18.5V15C11.25 13.7574 10.2426 12.75 9 12.75H5.5ZM4.75 15C4.75 14.5858 5.08579 14.25 5.5 14.25H9C9.41421 14.25 9.75 14.5858 9.75 15V18.5C9.75 18.9142 9.41421 19.25 9 19.25H5.5C5.08579 19.25 4.75 18.9142 4.75 18.5V15ZM12.75 5.5C12.75 4.25736 13.7574 3.25 15 3.25H18.5C19.7426 3.25 20.75 4.25736 20.75 5.5V8.99998C20.75 10.2426 19.7426 11.25 18.5 11.25H15C13.7574 11.25 12.75 10.2426 12.75 8.99998V5.5ZM15 4.75C14.5858 4.75 14.25 5.08579 14.25 5.5V8.99998C14.25 9.41419 14.5858 9.74998 15 9.74998H18.5C18.9142 9.74998 19.25 9.41419 19.25 8.99998V5.5C19.25 5.08579 18.9142 4.75 18.5 4.75H15ZM15 12.75C13.7574 12.75 12.75 13.7574 12.75 15V18.5C12.75 19.7426 13.7574 20.75 15 20.75H18.5C19.7426 20.75 20.75 19.7427 20.75 18.5V15C20.75 13.7574 19.7426 12.75 18.5 12.75H15ZM14.25 15C14.25 14.5858 14.5858 14.25 15 14.25H18.5C18.9142 14.25 19.25 14.5858 19.25 15V18.5C19.25 18.9142 18.9142 19.25 18.5 19.25H15C14.5858 19.25 14.25 18.9142 14.25 18.5V15Z"
+                            fill="#667085"
+                          />
+                        </svg>
+                        Dashboard
+                        <svg
+                          className={`ml-auto duration-200 transition-transform ${
+                            isOpen ? "rotate-0" : "rotate-180"
+                          }`}
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M15.8333 12.7083L10.625 7.5L5.41668 12.7083"
+                            stroke="#344054"
+                            strokeWidth="1.25"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                      {/* Submenu */}
+                      {isOpen && (
+                        <ul className="mt-2 ml-9">
+                          <li>
+                            <Link
+                              href="/"
+                              className={`flex items-center justify-between p-3 text-sm font-medium rounded-lg ${
+                                isActive("/")
+                                  ? "text-primary-500 bg-primary-100"
+                                  : ""
+                              }`}
+                            >
+                              Stocks
+                              <span className="text-xs uppercase text-primary-500">
+                                New
+                              </span>
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
                     </li>
-                  ))}
-                </ul>
+                  </ul>
+                </nav>
               </div>
             </div>
-            {/* pt-[245px] 2xl:mt-[180px] */}
-            <div className="px-5">
-              <div className="flex items-center justify-between w-full py-3 border-t border-soft-200">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <img
-                      src="/assets/avatar/avatar-1.png"
-                      className="rounded-full size-10"
-                      alt=""
-                    />
-                  </div>
-                  <div>
-                    <Typography
-                      as="p"
-                      size="sm"
-                      className="flex items-center gap-1 font-medium"
-                    >
-                      Arthur Taylor
-                      <RiVerifiedBadgeFill
-                        size={16}
-                        className="text-verified-base"
-                      />
-                    </Typography>
-                    <Typography as="span" size="xs" className="text-sub-600">
-                      arthur@alignui.com
-                    </Typography>
-                  </div>
-                </div>
-                <Link
-                  href="/"
-                  className="flex items-center justify-center transition rounded hover:bg-weak-50 size-6"
-                >
-                  <RiArrowRightSLine
-                    size={20}
-                    className="ml-auto text-sub-600"
-                  />
-                </Link>
-              </div>
+            {/* Bottom */}
+            <div className="px-4 py-5 text-center bg-theme-gray-300 rounded-2xl">
+              <h4 className="mb-2 text-base font-semibold left-6 text-secondary-500">
+                TailAdmin Pro
+              </h4>
+              <p className="mb-4 text-sm font-normal leading-5 text-secondary-200">
+                Get all dashboard and 300+ essential UI elements
+              </p>
+              <Link
+                href="/"
+                className="flex items-center py-3.5 px-6 justify-center text-sm font-medium text-white rounded-lg bg-primary-500 w-full"
+              >
+                Upgrade Plan
+              </Link>
             </div>
           </div>
         </aside>

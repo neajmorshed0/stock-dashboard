@@ -1,14 +1,11 @@
-"use client";
 import Card from "@/components/Cards/Card";
+import DividendChartTwo from "@/components/Charts/DividendChartTwo";
 import TrendingStock from "@/components/Slider/TrendingStock";
+import StockCard from "@/components/StockCards/StockCard";
+import WatchList from "@/components/Watchlist/WatchList";
+
 import dynamic from "next/dynamic";
 
-const DividendChartTwo = dynamic(
-  () => import("@/components/Charts/DividendChartTwo"),
-  {
-    ssr: false, // Enables suspense for loading fallback
-  }
-);
 const StockPriceChart = dynamic(
   () => import("@/components/Charts/StockPriceChart"),
   {
@@ -17,8 +14,40 @@ const StockPriceChart = dynamic(
 );
 
 export default function Home() {
+  const companies = [
+    {
+      symbol: "AAPL",
+      companyName: "Apple, Inc",
+      logoUrl: "/images/brands/apple.svg",
+    },
+    {
+      symbol: "PYPL",
+      companyName: "Paypal, Inc",
+      logoUrl: "/images/brands/paypal.svg",
+    },
+    {
+      symbol: "TSLA",
+      companyName: "Tesla, Inc",
+      logoUrl: "/images/brands/tesla.svg",
+    },
+    {
+      symbol: "AMZN",
+      companyName: "Amazone.com,Inc",
+      logoUrl: "/images/brands/amazone.svg",
+    },
+  ];
   return (
     <div className="space-y-6">
+      {/* <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {companies.map((company) => (
+          <StockCard
+            key={company.symbol}
+            symbol={company.symbol}
+            companyName={company.companyName}
+            logoUrl={company.logoUrl}
+          />
+        ))}
+      </div> */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <div className="flex items-center gap-3">
@@ -189,18 +218,19 @@ export default function Home() {
           </div>
         </Card>
       </div>
-      <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-8 space-y-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-12">
+        <div className="space-y-6 sm:col-span-2 xl:col-span-8">
           <StockPriceChart />
           <TrendingStock />
         </div>
-        <div className="col-span-4">
-          <div className="space-y-5">
+        <div className="sm:col-span-2 xl:col-span-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:block xl:space-y-5">
             <div>
-              {/* <DividendChart /> */}
               <DividendChartTwo />
             </div>
-            <div></div>
+            <div>
+              <WatchList />
+            </div>
           </div>
         </div>
       </div>
