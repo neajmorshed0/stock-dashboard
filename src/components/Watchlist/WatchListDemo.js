@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import Card from "../Cards/Card";
 import {
   Menu,
@@ -8,46 +8,8 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { companies } from "@/utils/data";
 
-export default function WatchList() {
-  const [stockData, setStockData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const fetchStockData = async () => {
-      try {
-        const data = {};
-        for (const company of companies) {
-          const response = await fetch(`/api/stock?symbol=${company.symbol}`);
-          if (!response.ok) throw new Error("Failed to fetch");
-          const result = await response.json();
-          data[company.symbol] = result;
-        }
-        setStockData(data);
-      } catch (err) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStockData();
-  }, []);
-
-  if (loading) {
-    return <div>Loading stock data...</div>;
-  }
-
-  if (error) {
-    return (
-      <div>
-        Error loading stock data. Our standard API rate limit is 25 requests per
-        day.
-      </div>
-    );
-  }
+export default function WatchListDemo() {
   return (
     <Card>
       <div className="flex items-center justify-between pb-2">
@@ -102,56 +64,50 @@ export default function WatchList() {
         </div>
       </div>
       <ul className="divide-y divide-theme-gray-200 h-[348px] overflow-y-auto mt-4 scrollbar scrollbar-thumb-theme-gray-200  scrollbar-track-secondary-500">
-        {companies.map((company) => {
-          const data = stockData[company.symbol];
-          if (!data) return null;
-
-          const price = data["05. price"];
-          const changePercent = data["10. change percent"];
-
-          return (
-            <li
-              key={company.symbol}
-              className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
-            >
-              <div className="grow">
-                <div className="flex items-center gap-3">
-                  <div>
-                    <img
-                      src={company.logoUrl}
-                      className="rounded-full size-10"
-                      alt={`${company.companyName} logo`}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                      {company.symbol}
-                    </h3>
-                    <span className="text-xs leading-none text-secondary-200">
-                      {company.companyName}
-                    </span>
-                  </div>
-                </div>
+        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
+          <div className="grow">
+            <div className="flex items-center gap-3">
+              <div>
+                <img
+                  src="/images/brands/apple.svg"
+                  className="rounded-full size-10"
+                  alt=""
+                />
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-secondary-500">
-                  ${parseFloat(price).toFixed(2)}
-                </h4>
-                <span
-                  className={`flex items-center justify-end h-6 text-xs font-medium  ${
-                    changePercent.includes("-")
-                      ? "text-error-500"
-                      : "text-success-500"
-                  }`}
-                >
-                  {parseFloat(changePercent).toFixed(2)}%
+                <h3 className="font-semibold leading-none uppercase text-secondary-500">
+                  APPL
+                </h3>
+                <span className="text-xs leading-none text-secondary-200">
+                  Apple, Inc
                 </span>
               </div>
-            </li>
-          );
-        })}
-
-        {/* <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
+            </div>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-secondary-500">
+              $4,008.65
+            </h4>
+            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
+                  fill="#027A48"
+                />
+              </svg>
+              11.01%
+            </span>
+          </div>
+        </li>
+        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
           <div className="grow">
             <div className="flex items-center gap-3">
               <div>
@@ -218,7 +174,7 @@ export default function WatchList() {
             <h4 className="text-sm font-semibold text-secondary-500">
               $32,227.00
             </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
+            <span className="flex items-center justify-end h-6 text-xs font-medium text-error-500">
               <svg
                 width="12"
                 height="12"
@@ -365,7 +321,7 @@ export default function WatchList() {
               11.01%
             </span>
           </div>
-        </li> */}
+        </li>
       </ul>
     </Card>
   );

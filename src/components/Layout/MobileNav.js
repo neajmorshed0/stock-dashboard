@@ -35,7 +35,6 @@ export default function MobileNav() {
             </Typography>
           </div>
         </div>
-
         <div className="flex space-x-3">
           <div className="flex space-x-3 xl:hidden">
             <button className="inline-flex items-center justify-center w-10 h-10 text-sub-600">

@@ -1,6 +1,7 @@
 import AppLayout from "@/components/Layout/AppLayout";
 import "./globals.css";
 import "swiper/css";
+import { SidebarProvider } from "@/context/SidebarContext";
 
 export const metadata = {
   title: "Tail Admin",
@@ -11,7 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <AppLayout>{children}</AppLayout>
+        <SidebarProvider>
+          <AppLayout>{children}</AppLayout>
+        </SidebarProvider>
       </body>
     </html>
   );

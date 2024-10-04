@@ -1,12 +1,71 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React from "react";
-// import { Chart as ApexCharts } from "react-apexcharts";
+import React, { useEffect, useState } from "react";
 
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-export default function DividendChart() {
+export default function DividendChart({ symbol }) {
+  const [chartData, setChartData] = useState([]);
+  const [chartCategories, setChartCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchDividendData = async () => {
+      const symbol = "IBM"; // Replace with your stock symbol or pass as a prop
+      const apiKey = process.env.ALPHA_VANTAGE_API_KEY; // Use your Alpha Vantage API key
+      const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${apiKey}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        console.log("API Response Data:", data); // Log for debugging
+
+        const timeSeries = data["Time Series (Daily)"];
+
+        if (!timeSeries) {
+          // Handle errors
+          if (data["Error Message"]) {
+            throw new Error(`API Error: ${data["Error Message"]}`);
+          } else if (data["Note"]) {
+            throw new Error(`API Rate Limit: ${data["Note"]}`);
+          } else {
+            throw new Error("Invalid data received from Alpha Vantage");
+          }
+        }
+
+        // Extract the date and dividend data
+        const dividendData = Object.keys(timeSeries).map((date) => {
+          const dividendAmount = timeSeries[date]["7. dividend amount"];
+          return {
+            date,
+            dividend: dividendAmount ? parseFloat(dividendAmount) : 0, // Ensure safe parsing
+          };
+        });
+
+        // Filter to only include entries with non-zero dividends
+        const filteredDividendData = dividendData.filter(
+          (entry) => entry.dividend > 0
+        );
+
+        if (filteredDividendData.length === 0) {
+          throw new Error("No dividend data available for this stock.");
+        }
+
+        // Prepare data for the chart
+        const categories = filteredDividendData.map((entry) => entry.date); // Dates
+        const dividends = filteredDividendData.map((entry) => entry.dividend); // Dividend values
+
+        setChartCategories(categories); // X-axis dates
+        setChartData(dividends); // Y-axis dividend values
+      } catch (error) {
+        console.error("Error fetching dividend data:", error.message);
+      }
+    };
+
+    fetchDividendData();
+  }, []);
+
   const chartOptions = {
     chart: {
       type: "bar",
@@ -28,7 +87,7 @@ export default function DividendChart() {
       enabled: false,
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      categories: chartCategories, // Dynamic dates
       labels: {
         style: {
           colors: "#94A3B8",
@@ -67,7 +126,7 @@ export default function DividendChart() {
   const chartSeries = [
     {
       name: "Dividend",
-      data: [400, 600, 500, 700, 400, 600], // Mock data values for the chart
+      data: chartData, // Dynamic dividend data
     },
   ];
 
@@ -75,12 +134,16 @@ export default function DividendChart() {
     <div className="w-full max-w-sm mx-auto">
       <div className="p-4 bg-white rounded-lg shadow">
         <h4 className="mb-4 text-lg font-medium">Dividend</h4>
-        <ApexCharts
-          options={chartOptions}
-          series={chartSeries}
-          type="bar"
-          height={300}
-        />
+        {chartData.length > 0 ? (
+          <ApexCharts
+            options={chartOptions}
+            series={chartSeries}
+            type="bar"
+            height={300}
+          />
+        ) : (
+          <p>No dividend data available for this stock.</p>
+        )}
       </div>
     </div>
   );

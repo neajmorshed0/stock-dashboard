@@ -4,10 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
 import { Navigation } from "swiper/modules";
 import Card from "../Cards/Card";
-import { companies } from "@/utils/data";
-import TrendingStockCard from "../StockCards/TrendingStockCard";
 
-export default function TrendingStock() {
+export default function TrendingStockDemo() {
   const swiperOptions = {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -85,16 +83,7 @@ export default function TrendingStock() {
       </div>
       <div>
         <Swiper {...swiperOptions}>
-          {companies.map((company, i) => (
-            <SwiperSlide key={company.symbol}>
-              <TrendingStockCard
-                symbol={company.symbol}
-                companyName={company.companyName}
-                logoUrl={company.logoUrl}
-              />
-            </SwiperSlide>
-          ))}
-          {/* <SwiperSlide>
+          <SwiperSlide>
             <div className="p-5 rounded-2xl bg-theme-gray-500">
               <div className="flex justify-between pb-5 border-b border-theme-gray-200">
                 <div className="flex items-center gap-3">
@@ -255,7 +244,7 @@ export default function TrendingStock() {
                 </button>
               </div>
             </div>
-          </SwiperSlide> */}
+          </SwiperSlide>
         </Swiper>
       </div>
     </Card>
