@@ -9,14 +9,14 @@ import { SidebarContext } from "@/context/SidebarContext";
 export default function MobileHeader() {
   const { toggleSidebar } = useContext(SidebarContext);
   return (
-    <header className="sticky top-0 block px-6 py-4 bg-white border-b xl:hidden border-theme-gray-200">
+    <header className="sticky top-0 block px-6 py-4 bg-white border-b dark:border-secondary-300 dark:bg-gray-900 xl:hidden border-theme-gray-200">
       <div className="flex justify-between">
         {/* Search And Toggle Button */}
         <div className="flex gap-4">
           <div>
             <button
               onClick={toggleSidebar}
-              className="p-3 border rounded-lg size-11 border-theme-gray-200"
+              className="p-3 border rounded-lg dark:border-secondary-300 size-11 border-theme-gray-200"
             >
               <svg
                 width="20"

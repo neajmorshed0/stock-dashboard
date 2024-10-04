@@ -28,7 +28,11 @@ export default function TrendingStockCard({ symbol, companyName, logoUrl }) {
   }
 
   if (error) {
-    return <div>Error loading stock data.</div>;
+    return (
+      <div className="text-secondary-300 dark:text-white">
+        Error loading stock data.
+      </div>
+    );
   }
 
   const price = stockData["05. price"];

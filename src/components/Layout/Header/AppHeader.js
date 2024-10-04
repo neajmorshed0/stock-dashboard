@@ -7,14 +7,14 @@ import SearchInput from "./SearchInput";
 
 export default function AppHeader({ onClick }) {
   return (
-    <header className="sticky top-0 z-50 hidden px-6 py-4 bg-white border-b xl:block border-theme-gray-200">
+    <header className="sticky top-0 z-50 hidden px-6 py-4 bg-white border-b dark:border-secondary-300 dark:bg-gray-900 xl:block border-theme-gray-200">
       <div className="flex justify-between">
         {/* Search And Toggle Button */}
         <div className="flex gap-4">
           <div>
             <button
               onClick={onClick}
-              className="p-3 transition border rounded-lg text-secondary-200 hover:text-secondary-500 size-11 border-theme-gray-200"
+              className="p-3 transition border rounded-lg dark:border-secondary-300 text-secondary-200 hover:text-secondary-500 size-11 border-theme-gray-200"
             >
               <svg
                 width="20"

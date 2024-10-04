@@ -1,16 +1,34 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function NotificationPopup() {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const dropdownRef = useRef(null); // Create a ref for the dropdown
+
   const toggleNotification = () => {
     setIsNotificationOpen(!isNotificationOpen);
   };
+  const handleClickOutside = (event) => {
+    // Check if the clicked element is outside the dropdown
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsNotificationOpen(false); // Close the dropdown
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener for clicks outside the dropdown
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up the event listener on unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={toggleNotification}
-        className="relative inline-flex items-center justify-center border rounded-full border-theme-gray-200 size-11"
+        className="relative inline-flex items-center justify-center border rounded-full dark:border-secondary-300 border-theme-gray-200 size-11"
       >
         <svg
           className="size-5"
@@ -31,11 +49,11 @@ export default function NotificationPopup() {
       </button>
       {/* Dropdown Menu */}
       {isNotificationOpen && (
-        <ul className="absolute right-0 flex flex-col w-56 min-w-full py-1 mt-4 transition duration-100 ease-out origin-top-right bg-white border rounded border-theme-gray-200 shadow-custom-xs">
+        <ul className="absolute right-0 flex flex-col w-56 min-w-full py-1 mt-4 transition duration-100 ease-out origin-top-right bg-white border rounded dark:border-gray-700 dark:bg-gray-900 border-theme-gray-200 shadow-custom-xs">
           <li>
             <button
               onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-              className="w-full px-4 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500"
+              className="w-full px-4 py-2 text-sm text-left transition dark:hover:bg-gray-950 hover:bg-gray-100 hover:text-secondary-500 dark:text-white"
             >
               My Profile
             </button>
@@ -43,7 +61,7 @@ export default function NotificationPopup() {
           <li>
             <button
               onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-              className="w-full px-4 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500"
+              className="w-full px-4 py-2 text-sm text-left transition dark:hover:bg-gray-950 hover:bg-gray-100 hover:text-secondary-500 dark:text-white"
             >
               My Contact
             </button>
@@ -51,7 +69,7 @@ export default function NotificationPopup() {
           <li>
             <button
               onClick={() => setIsOpen(!isNotificationOpen)}
-              className="w-full px-4 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500"
+              className="w-full px-4 py-2 text-sm text-left transition dark:hover:bg-gray-950 hover:bg-gray-100 hover:text-secondary-500 dark:text-white"
             >
               Account Settings
             </button>

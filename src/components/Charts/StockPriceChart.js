@@ -171,13 +171,22 @@ const StockPriceChart = () => {
     },
     xaxis: {
       type: "datetime",
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        style: {
+          colors: "#64748b",
+          fontSize: "12px",
+        },
+      },
     },
     yaxis: {
       opposite: false,
       labels: {
         formatter: (value) => `${value / 1}K`,
         style: {
-          colors: "#344054",
+          colors: "#64748b",
           fontSize: "12px",
         },
       },
@@ -187,70 +196,38 @@ const StockPriceChart = () => {
     },
   });
 
-  const [selectedTimeframe, setSelectedTimeframe] = useState("annually");
-
-  const timeframes = [
-    { label: "Monthly", value: "monthly" },
-    { label: "Quarterly", value: "quarterly" },
-    { label: "Annually", value: "annually" },
+  // Tab data array
+  const tabs = [
+    { id: "monthly", label: "Monthly" },
+    { id: "quarterly", label: "Quarterly" },
+    { id: "annually", label: "Annually" },
   ];
 
-  const updateData = (timeline) => {
-    setSelectedTimeframe(timeline);
-
-    switch (timeline) {
-      case "monthly":
-        ApexCharts.exec(
-          "area-datetime",
-          "zoomX",
-          new Date("01 Jan 2023").getTime(),
-          new Date("01 Feb 2023").getTime()
-        );
-        break;
-      case "quarterly":
-        ApexCharts.exec(
-          "area-datetime",
-          "zoomX",
-          new Date("01 Jan 2023").getTime(),
-          new Date("01 Apr 2023").getTime()
-        );
-        break;
-      case "annually":
-        ApexCharts.exec(
-          "area-datetime",
-          "zoomX",
-          new Date("01 Jan 2020").getTime(),
-          new Date("01 Jan 2023").getTime()
-        );
-        break;
-      default:
-        break;
-    }
-  };
+  const [activeTab, setActiveTab] = useState("monthly");
 
   return (
     <Card id="chart">
       <div className="flex flex-col justify-between gap-5 sm:items-center sm:flex-row">
         <div>
-          <h2 className="text-lg font-semibold text-secondary-500">
+          <h2 className="text-lg font-semibold dark:text-white text-secondary-500">
             Portfolio Performance
           </h2>
-          <p className="text-sm text-secondary-200">
+          <p className="text-sm text-secondary-200 dark:text-gray-300">
             Here is your performance stats of each month
           </p>
         </div>
-        <div className="grid grid-cols-3 p-0.5 space-x-2 rounded-lg bg-theme-gray-500">
-          {timeframes.map(({ label, value }) => (
+        <div className="grid grid-cols-3 p-0.5 space-x-2 rounded-lg dark:bg-gray-900 bg-theme-gray-500">
+          {tabs.map((tab) => (
             <button
-              key={value}
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
               className={`px-3 py-2.5 text-sm font-medium rounded-md ${
-                selectedTimeframe === value
-                  ? "bg-white text-secondary-500"
+                activeTab === tab.id
+                  ? "bg-white dark:bg-secondary-500 dark:text-white text-secondary-500"
                   : "bg-transparent text-secondary-200"
               }`}
-              onClick={() => updateData(value)}
             >
-              {label}
+              {tab.label}
             </button>
           ))}
         </div>

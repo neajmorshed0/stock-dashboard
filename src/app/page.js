@@ -1,15 +1,13 @@
 import Card from "@/components/Cards/Card";
-import DividendChartTwo from "@/components/Charts/DividendChartTwo";
+import DividendChartTwo from "@/components/Charts/DividendChart";
+// import StockTest from "@/components/Charts/StockTest";
 import TrendingStockDemo from "@/components/Slider/TrendingStockDemo";
 import WatchListDemo from "@/components/Watchlist/WatchListDemo";
 import dynamic from "next/dynamic";
 
-const StockPriceChart = dynamic(
-  () => import("@/components/Charts/StockPriceChart"),
-  {
-    ssr: false, // Enables suspense for loading fallback
-  }
-);
+const StockTest = dynamic(() => import("@/components/Charts/StockPriceChart"), {
+  ssr: false, // Enables suspense for loading fallback
+});
 
 export default function Home() {
   return (
@@ -25,16 +23,16 @@ export default function Home() {
               />
             </div>
             <div>
-              <h3 className="font-semibold leading-none uppercase text-secondary-500">
+              <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
                 AAPL
               </h3>
-              <span className="text-xs leading-none text-secondary-200">
+              <span className="text-xs leading-none dark:text-gray-300 text-secondary-200">
                 Apple, Inc
               </span>
             </div>
           </div>
           <div className="flex items-center justify-between mt-6">
-            <h2 className="text-xl font-semibold text-secondary-500">
+            <h2 className="text-xl font-semibold text-secondary-500 dark:text-white">
               $1,232.00
             </h2>
             <span className="flex items-center h-6 px-2 py-1 text-sm font-medium rounded-full text-success-500 bg-success-100">
@@ -67,16 +65,16 @@ export default function Home() {
               />
             </div>
             <div>
-              <h3 className="font-semibold leading-none uppercase text-secondary-500">
+              <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
                 PYPL
               </h3>
-              <span className="text-xs leading-none text-secondary-200">
+              <span className="text-xs leading-none text-secondary-200 dark:text-gray-300">
                 Paypal, Inc
               </span>
             </div>
           </div>
           <div className="flex items-center justify-between mt-6">
-            <h2 className="text-xl font-semibold text-secondary-500">
+            <h2 className="text-xl font-semibold dark:text-white text-secondary-500">
               $965.00
             </h2>
             <span className="flex items-center h-6 px-2 py-1 text-sm font-medium rounded-full text-error-500 bg-error-100">
@@ -109,16 +107,16 @@ export default function Home() {
               />
             </div>
             <div>
-              <h3 className="font-semibold leading-none uppercase text-secondary-500">
+              <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
                 TSLA
               </h3>
-              <span className="text-xs leading-none text-secondary-200">
+              <span className="text-xs leading-none dark:text-gray-300 text-secondary-200">
                 Tesla, Inc
               </span>
             </div>
           </div>
           <div className="flex items-center justify-between mt-6">
-            <h2 className="text-xl font-semibold text-secondary-500">
+            <h2 className="text-xl font-semibold dark:text-white text-secondary-500">
               $1,232.00
             </h2>
             <span className="flex items-center h-6 px-2 py-1 text-sm font-medium rounded-full text-success-500 bg-success-100">
@@ -151,16 +149,16 @@ export default function Home() {
               />
             </div>
             <div>
-              <h3 className="font-semibold leading-none uppercase text-secondary-500">
+              <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
                 AMZN
               </h3>
-              <span className="text-xs leading-none text-secondary-200">
+              <span className="text-xs leading-none dark:text-gray-300 text-secondary-200">
                 Amazone.com, Inc
               </span>
             </div>
           </div>
           <div className="flex items-center justify-between mt-6">
-            <h2 className="text-xl font-semibold text-secondary-500">
+            <h2 className="text-xl font-semibold dark:text-white text-secondary-500">
               $2,567.99
             </h2>
             <span className="flex items-center h-6 px-2 py-1 text-sm font-medium rounded-full text-success-500 bg-success-100">
@@ -186,7 +184,8 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-12">
         <div className="space-y-6 sm:col-span-2 xl:col-span-8">
-          <StockPriceChart />
+          {/* <StockPriceChart /> */}
+          <StockTest />
           <TrendingStockDemo />
         </div>
         <div className="sm:col-span-2 xl:col-span-4">

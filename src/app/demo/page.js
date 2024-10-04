@@ -1,5 +1,5 @@
-import Card from "@/components/Cards/Card";
-import DividendChartTwo from "@/components/Charts/DividendChartTwo";
+import DividendChart from "@/components/Charts/DividendChart";
+import StockTest from "@/components/Charts/StockPriceChart";
 import TrendingStock from "@/components/Slider/TrendingStock";
 import StockCard from "@/components/StockCards/StockCard";
 import WatchList from "@/components/Watchlist/WatchList";
@@ -30,13 +30,14 @@ export default function Home() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-12">
         <div className="space-y-6 sm:col-span-2 xl:col-span-8">
-          <StockPriceChart />
+          {/* <StockPriceChart /> */}
+          <StockTest />
           <TrendingStock />
         </div>
         <div className="sm:col-span-2 xl:col-span-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:block xl:space-y-5">
             <div>
-              <DividendChartTwo />
+              <DividendChart />
             </div>
             <div>
               <WatchList />

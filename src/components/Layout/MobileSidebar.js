@@ -40,13 +40,22 @@ export default function MobileSidebar() {
         leaveTo="-translate-x-full"
       >
         <aside
-          className={`fixed left-0 top-0 z-40  bg-white xl:w-[290px]  border-r border-[#E4E7EC]`}
+          className={`fixed left-0 top-0 z-40 bg-white xl:w-[290px]  border-r border-theme-gray-200`}
         >
           <div className="flex flex-col justify-between min-h-screen px-5 pt-8 pb-5">
             {/* Top */}
             <div className="flex items-center justify-between">
               <Link href="/">
-                <img src="/images/logo/logo-black.svg" alt="" />
+                <img
+                  src="/images/logo/logo-black.svg"
+                  className="block dark:hidden"
+                  alt=""
+                />
+                <img
+                  src="/images/logo/logo-white.svg"
+                  className="hidden dark:block"
+                  alt=""
+                />
               </Link>
               <button
                 className="flex items-center justify-center rounded text-secondary-300 size-8 bg-gray-50"

@@ -8,12 +8,54 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
+const stocks = [
+  {
+    name: "Apple, Inc",
+    code: "APPL",
+    price: "$4,008.65",
+    change: "11.01%",
+    changeDirection: "up",
+    logo: "/images/brands/apple.svg",
+  },
+  {
+    name: "Spotify.com",
+    code: "SPOT",
+    price: "$11,689.00",
+    change: "9.48%",
+    changeDirection: "up",
+    logo: "/images/brands/spotify.svg",
+  },
+  {
+    name: "Airbnb, Inc",
+    code: "ABNB",
+    price: "$32,227.00",
+    change: "0.29%",
+    changeDirection: "down",
+    logo: "/images/brands/airbnb.svg",
+  },
+  {
+    name: "Envato, Inc",
+    code: "envt",
+    price: "$13,895.65",
+    change: "4.56%",
+    changeDirection: "up",
+    logo: "/images/brands/envato.svg",
+  },
+  {
+    name: "Qiwi, Inc",
+    code: "qiwi",
+    price: "$13,895.65",
+    change: "4.56%",
+    changeDirection: "up",
+    logo: "/images/brands/qiwi.svg",
+  },
+];
 
 export default function WatchListDemo() {
   return (
     <Card>
       <div className="flex items-center justify-between pb-2">
-        <h2 className="text-lg font-semibold text-secondary-500">
+        <h2 className="text-lg font-semibold dark:text-white text-secondary-500">
           My Watchlist
         </h2>
         <div className="relative">
@@ -46,15 +88,15 @@ export default function WatchListDemo() {
               <MenuItems
                 anchor="left"
                 transition
-                className="flex flex-col w-32 py-1 mt-6 ml-2 transition duration-100 ease-out origin-top-right bg-white border rounded-lg border-soft-200 shadow-custom-xs"
+                className="flex flex-col w-32 py-1 mt-6 ml-2 transition duration-100 ease-out origin-top-right bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-700 border-soft-200 shadow-custom-xs"
               >
                 <MenuItem>
-                  <button className="px-2 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500">
+                  <button className="px-2 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500 dark:text-white dark:hover:bg-gray-800">
                     Edit
                   </button>
                 </MenuItem>
                 <MenuItem>
-                  <button className="px-2 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500">
+                  <button className="px-2 py-2 text-sm text-left transition hover:bg-gray-100 hover:text-secondary-500 dark:text-white dark:hover:bg-gray-800">
                     Delete
                   </button>
                 </MenuItem>
@@ -63,265 +105,78 @@ export default function WatchListDemo() {
           </Menu>
         </div>
       </div>
-      <ul className="divide-y divide-theme-gray-200 h-[348px] overflow-y-auto mt-4 scrollbar scrollbar-thumb-theme-gray-200  scrollbar-track-secondary-500">
-        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-          <div className="grow">
-            <div className="flex items-center gap-3">
-              <div>
-                <img
-                  src="/images/brands/apple.svg"
-                  className="rounded-full size-10"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                  APPL
-                </h3>
-                <span className="text-xs leading-none text-secondary-200">
-                  Apple, Inc
-                </span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-secondary-500">
-              $4,008.65
-            </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
-                  fill="#027A48"
-                />
-              </svg>
-              11.01%
-            </span>
-          </div>
-        </li>
-        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-          <div className="grow">
-            <div className="flex items-center gap-3">
-              <div>
-                <img
-                  src="/images/brands/spotify.svg"
-                  className="rounded-full size-10"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                  ABNB
-                </h3>
-                <span className="text-xs leading-none text-secondary-200">
-                  Spotify.com
-                </span>
+      <ul className="divide-y dark:divide-gray-600 divide-theme-gray-200 h-[348px] overflow-y-auto mt-4 scrollbar scrollbar-thumb-theme-gray-200  scrollbar-track-secondary-500">
+        {stocks.map((stock, index) => (
+          <li
+            key={index}
+            className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
+          >
+            <div className="grow">
+              <div className="flex items-center gap-3">
+                <div>
+                  <img
+                    src={stock.logo}
+                    className="rounded-full size-10"
+                    alt={`${stock.name} logo`}
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
+                    {stock.code}
+                  </h3>
+                  <span className="text-xs leading-none dark:text-gray-300 text-secondary-200">
+                    {stock.name}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-secondary-500">
-              $11,689.00
-            </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <div>
+              <h4 className="text-sm font-semibold dark:text-white text-secondary-500">
+                {stock.price}
+              </h4>
+              <span
+                className={`flex items-center justify-end h-6 text-xs font-medium ${
+                  stock.changeDirection === "up"
+                    ? "text-success-500"
+                    : "text-error-500"
+                }`}
               >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
-                  fill="#027A48"
-                />
-              </svg>
-              9.48
-            </span>
-          </div>
-        </li>
-        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-          <div className="grow">
-            <div className="flex items-center gap-3">
-              <div>
-                <img
-                  src="/images/brands/airbnb.svg"
-                  className="rounded-full size-10"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                  APPL
-                </h3>
-                <span className="text-xs leading-none text-secondary-200">
-                  Airbnb, Inc
-                </span>
-              </div>
+                {stock.changeDirection === "up" ? (
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
+                      fill="#027A48"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M5.31462 10.3761C5.45194 10.5293 5.65136 10.6257 5.87329 10.6257C5.8736 10.6257 5.8739 10.6257 5.87421 10.6257C6.0663 10.6259 6.25845 10.5527 6.40505 10.4062L9.40514 7.4082C9.69814 7.11541 9.69831 6.64054 9.40552 6.34754C9.11273 6.05454 8.63785 6.05438 8.34486 6.34717L6.62329 8.06753L6.62329 1.875C6.62329 1.46079 6.28751 1.125 5.87329 1.125C5.45908 1.125 5.12329 1.46079 5.12329 1.875L5.12329 8.06422L3.40516 6.34719C3.11218 6.05439 2.6373 6.05454 2.3445 6.34752C2.0517 6.64051 2.05185 7.11538 2.34484 7.40818L5.31462 10.3761Z"
+                      fill="#B42318"
+                    />
+                  </svg>
+                )}
+                {stock.change}
+              </span>
             </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-secondary-500">
-              $32,227.00
-            </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-error-500">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M5.31462 10.3761C5.45194 10.5293 5.65136 10.6257 5.87329 10.6257C5.8736 10.6257 5.8739 10.6257 5.87421 10.6257C6.0663 10.6259 6.25845 10.5527 6.40505 10.4062L9.40514 7.4082C9.69814 7.11541 9.69831 6.64054 9.40552 6.34754C9.11273 6.05454 8.63785 6.05438 8.34486 6.34717L6.62329 8.06753L6.62329 1.875C6.62329 1.46079 6.28751 1.125 5.87329 1.125C5.45908 1.125 5.12329 1.46079 5.12329 1.875L5.12329 8.06422L3.40516 6.34719C3.11218 6.05439 2.6373 6.05454 2.3445 6.34752C2.0517 6.64051 2.05185 7.11538 2.34484 7.40818L5.31462 10.3761Z"
-                  fill="#B42318"
-                />
-              </svg>
-              0.29%
-            </span>
-          </div>
-        </li>
-        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-          <div className="grow">
-            <div className="flex items-center gap-3">
-              <div>
-                <img
-                  src="/images/brands/apple.svg"
-                  className="rounded-full size-10"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                  APPL
-                </h3>
-                <span className="text-xs leading-none text-secondary-200">
-                  Apple, Inc
-                </span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-secondary-500">
-              $4,008.65
-            </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
-                  fill="#027A48"
-                />
-              </svg>
-              11.01%
-            </span>
-          </div>
-        </li>
-        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-          <div className="grow">
-            <div className="flex items-center gap-3">
-              <div>
-                <img
-                  src="/images/brands/envato.svg"
-                  className="rounded-full size-10"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                  envt
-                </h3>
-                <span className="text-xs leading-none text-secondary-200">
-                  Envato, Inc
-                </span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-secondary-500">
-              $13,895.65
-            </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
-                  fill="#027A48"
-                />
-              </svg>
-              3.79%
-            </span>
-          </div>
-        </li>
-        <li className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
-          <div className="grow">
-            <div className="flex items-center gap-3">
-              <div>
-                <img
-                  src="/images/brands/qiwi.svg"
-                  className="rounded-full size-10"
-                  alt=""
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold leading-none uppercase text-secondary-500">
-                  QIWI
-                </h3>
-                <span className="text-xs leading-none text-secondary-200">
-                  qiwi.com, Inc
-                </span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-secondary-500">
-              $4,008.65
-            </h4>
-            <span className="flex items-center justify-end h-6 text-xs font-medium text-success-500">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M5.56462 1.62393C5.70193 1.47072 5.90135 1.37432 6.12329 1.37432C6.1236 1.37432 6.12391 1.37432 6.12422 1.37432C6.31631 1.37415 6.50845 1.44731 6.65505 1.59381L9.65514 4.5918C9.94814 4.88459 9.94831 5.35947 9.65552 5.65246C9.36273 5.94546 8.88785 5.94562 8.59486 5.65283L6.87329 3.93247L6.87329 10.125C6.87329 10.5392 6.53751 10.875 6.12329 10.875C5.70908 10.875 5.37329 10.5392 5.37329 10.125L5.37329 3.93578L3.65516 5.65282C3.36218 5.94562 2.8873 5.94547 2.5945 5.65248C2.3017 5.35949 2.30185 4.88462 2.59484 4.59182L5.56462 1.62393Z"
-                  fill="#027A48"
-                />
-              </svg>
-              11.01%
-            </span>
-          </div>
-        </li>
+          </li>
+        ))}
       </ul>
     </Card>
   );

@@ -8,7 +8,6 @@ export default function ThemeToggler() {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
       setDarkTheme(true);
-      x;
       document.documentElement.classList.add("dark");
     } else {
       setDarkTheme(false); // Set light mode
@@ -42,7 +41,7 @@ export default function ThemeToggler() {
     <div>
       <button
         onClick={toggleTheme}
-        className="inline-flex items-center justify-center border rounded-full cursor-pointer border-theme-gray-200 size-11"
+        className="inline-flex items-center justify-center border rounded-full cursor-pointer dark:border-secondary-300 border-theme-gray-200 size-11"
       >
         {darkTheme ? (
           <svg

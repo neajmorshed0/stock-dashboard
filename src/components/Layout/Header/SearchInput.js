@@ -21,10 +21,10 @@ export default function SearchInput() {
       </div>
       <input
         type="text"
-        className="w-full py-2 pl-10 pr-10 border rounded-lg placeholder:text-sm placeholder:text-secondary-200 h-11 border-theme-gray-200"
+        className="w-full py-2 pl-10 pr-10 border rounded-lg dark:border-secondary-300 dark:bg-transparent placeholder:text-sm placeholder:text-secondary-200 h-11 border-theme-gray-200"
         placeholder="Search or type command..."
       />
-      <div className="absolute border h-7 rounded-lg border-theme-gray-200 inset-y-1/2 -translate-y-1/2   right-2.5 flex items-center px-2 py-1 text-xs font-normal text-secondary-200 pointer-events-none text-soft-400">
+      <div className="absolute border h-7 rounded-lg dark:border-secondary-300 border-theme-gray-200 inset-y-1/2 -translate-y-1/2   right-2.5 flex items-center px-2 py-1 text-xs font-normal text-secondary-200 pointer-events-none text-soft-400">
         ⌘K
       </div>
     </div>

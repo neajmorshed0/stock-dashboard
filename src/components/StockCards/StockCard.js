@@ -29,7 +29,11 @@ const StockCard = ({ symbol, companyName, logoUrl }) => {
   }
 
   if (error) {
-    return <div>Error loading stock data.</div>;
+    return (
+      <div className="dark:text-white text-secondary-300">
+        Error loading stock data./ API rate limit is 25 requests per day.
+      </div>
+    );
   }
 
   const price = stockData["05. price"];

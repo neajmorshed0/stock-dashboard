@@ -5,6 +5,7 @@ import AppHeader from "./Header/AppHeader";
 import MobileHeader from "./Header/MobileHeader";
 import SidebarNav from "./SidebarNav";
 import MobileSidebar from "./MobileSidebar";
+import SidebarWidget from "../Widget/SidebarWidget";
 
 export default function AppLayout({ children }) {
   const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
@@ -17,39 +18,36 @@ export default function AppLayout({ children }) {
         className={`fixed xl:block  ${
           isDesktopSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } left-0 
-         bg-white xl:w-[290px] hidden border-r border-theme-gray-200`}
+         bg-white dark:bg-gray-900 dark:border-secondary-300 xl:w-[290px] hidden border-r border-theme-gray-200`}
       >
         <div className="flex flex-col justify-between min-h-screen px-5 pt-8 pb-5">
           {/* Top */}
-          <div className="">
+          <div>
             <Link href="/">
-              <img src="/images/logo/logo-black.svg" alt="" />
+              <img
+                src="/images/logo/logo-black.svg"
+                className="block dark:hidden"
+                alt="Logo"
+              />
+              <img
+                src="/images/logo/logo-white.svg"
+                className="hidden dark:block"
+                width={156}
+                alt="Logo"
+              />
             </Link>
           </div>
           {/* Menu */}
           <div className="flex-1 pt-7">
-            <div className="">
-              <span className="text-xs uppercase text-theme-gray-400">
+            <div>
+              <span className="text-xs uppercase dark:text-gray-300 text-theme-gray-400">
                 Main
               </span>
               <SidebarNav />
             </div>
           </div>
           {/* Bottom */}
-          <div className="px-4 py-5 text-center bg-theme-gray-300 rounded-2xl">
-            <h4 className="mb-2 text-base font-semibold left-6 text-secondary-500">
-              TailAdmin Pro
-            </h4>
-            <p className="mb-4 text-sm font-normal leading-5 text-secondary-200">
-              Get all dashboard and 300+ essential UI elements
-            </p>
-            <Link
-              href="/"
-              className="flex items-center py-3.5 px-6 justify-center text-sm font-medium text-white rounded-lg bg-primary-500 w-full"
-            >
-              Upgrade Plan
-            </Link>
-          </div>
+          <SidebarWidget />
         </div>
       </aside>
       <MobileSidebar />
