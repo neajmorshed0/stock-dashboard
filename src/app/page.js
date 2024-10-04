@@ -1,13 +1,15 @@
 import Card from "@/components/Cards/Card";
 import DividendChartTwo from "@/components/Charts/DividendChart";
-// import StockTest from "@/components/Charts/StockTest";
 import TrendingStockDemo from "@/components/Slider/TrendingStockDemo";
 import WatchListDemo from "@/components/Watchlist/WatchListDemo";
 import dynamic from "next/dynamic";
 
-const StockTest = dynamic(() => import("@/components/Charts/StockPriceChart"), {
-  ssr: false, // Enables suspense for loading fallback
-});
+const StockPriceChart = dynamic(
+  () => import("@/components/Charts/StockPriceChart"),
+  {
+    ssr: false, // Enables suspense for loading fallback
+  }
+);
 
 export default function Home() {
   return (
@@ -184,8 +186,8 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-12">
         <div className="space-y-6 sm:col-span-2 xl:col-span-8">
-          {/* <StockPriceChart /> */}
-          <StockTest />
+          <StockPriceChart />
+
           <TrendingStockDemo />
         </div>
         <div className="sm:col-span-2 xl:col-span-4">

@@ -5,6 +5,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import Link from "next/link";
 import SidebarNav from "./SidebarNav";
 import { usePathname } from "next/navigation";
+import SidebarWidget from "../Widget/SidebarWidget";
 
 export default function MobileSidebar() {
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
@@ -40,7 +41,7 @@ export default function MobileSidebar() {
         leaveTo="-translate-x-full"
       >
         <aside
-          className={`fixed left-0 top-0 z-40 bg-white xl:w-[290px]  border-r border-theme-gray-200`}
+          className={`fixed left-0 top-0 dark:border-gray-700 z-40 dark:bg-gray-900 bg-white xl:w-[290px]  border-r border-theme-gray-200`}
         >
           <div className="flex flex-col justify-between min-h-screen px-5 pt-8 pb-5">
             {/* Top */}
@@ -58,7 +59,7 @@ export default function MobileSidebar() {
                 />
               </Link>
               <button
-                className="flex items-center justify-center rounded text-secondary-300 size-8 bg-gray-50"
+                className="flex items-center justify-center rounded dark:text-white dark:bg-gray-800 text-secondary-300 size-8 bg-gray-50"
                 onClick={closeSidebar}
               >
                 <svg
@@ -81,20 +82,7 @@ export default function MobileSidebar() {
               </div>
             </div>
             {/* Bottom */}
-            <div className="px-4 py-5 text-center bg-theme-gray-300 rounded-2xl">
-              <h4 className="mb-2 text-base font-semibold left-6 text-secondary-500">
-                TailAdmin Pro
-              </h4>
-              <p className="mb-4 text-sm font-normal leading-5 text-secondary-200">
-                Get all dashboard and 300+ essential UI elements
-              </p>
-              <Link
-                href="/"
-                className="flex items-center py-3.5 px-6 justify-center text-sm font-medium text-white rounded-lg bg-primary-500 w-full"
-              >
-                Upgrade Plan
-              </Link>
-            </div>
+            <SidebarWidget />
           </div>
         </aside>
       </TransitionChild>
