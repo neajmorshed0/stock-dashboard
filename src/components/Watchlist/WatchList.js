@@ -124,17 +124,17 @@ export default function WatchList() {
                     />
                   </div>
                   <div>
-                    <h3 className="font-semibold leading-none uppercase text-secondary-500">
+                    <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
                       {company.symbol}
                     </h3>
-                    <span className="text-xs leading-none text-secondary-200">
+                    <span className="text-xs leading-none dark:text-secondary-300 text-secondary-200">
                       {company.companyName}
                     </span>
                   </div>
                 </div>
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-secondary-500">
+                <h4 className="text-sm font-semibold dark:text-white text-secondary-500">
                   ${parseFloat(price).toFixed(2)}
                 </h4>
                 <span

@@ -43,11 +43,11 @@ export default function TrendingStock() {
   return (
     <Card>
       <div className="flex items-center justify-between pb-6">
-        <h2 className="text-lg font-semibold text-secondary-500">
+        <h2 className="text-lg font-semibold dark:text-white text-secondary-500">
           Trending Stocks
         </h2>
         <div className="flex gap-1.5">
-          <button className="border btn-prev transition bg-white hover:bg-theme-gray-500 border-theme-gray-200 rounded-[100px] size-8 flex items-center justify-center">
+          <button className="border btn-prev dark:text-white transition dark:bg-gray-900 dark:border-gray-700  bg-white hover:bg-theme-gray-500 border-theme-gray-200 rounded-[100px] size-8 flex items-center justify-center">
             <svg
               width="16"
               height="16"
@@ -57,14 +57,14 @@ export default function TrendingStock() {
             >
               <path
                 d="M10.1667 4L6 8.16667L10.1667 12.3333"
-                stroke="#344054"
+                stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
           </button>
-          <button className="border btn-next transition bg-white hover:bg-theme-gray-500 border-theme-gray-200 rounded-[100px] size-8 flex items-center justify-center">
+          <button className="border btn-prev dark:text-white transition dark:bg-gray-900 dark:border-gray-700  bg-white hover:bg-theme-gray-500 border-theme-gray-200 rounded-[100px] size-8 flex items-center justify-center">
             <svg
               width="16"
               height="16"
@@ -74,7 +74,7 @@ export default function TrendingStock() {
             >
               <path
                 d="M5.83333 12.6667L10 8.5L5.83333 4.33333"
-                stroke="#344054"
+                stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"

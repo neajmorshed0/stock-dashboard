@@ -38,23 +38,23 @@ export default function TrendingStockCard({ symbol, companyName, logoUrl }) {
   const price = stockData["05. price"];
   const changePercent = stockData["10. change percent"];
   return (
-    <div className="p-5 rounded-2xl bg-theme-gray-500">
-      <div className="flex justify-between pb-5 border-b border-theme-gray-200">
+    <div className="p-5 rounded-2xl bg-theme-gray-500 dark:bg-gray-900">
+      <div className="flex justify-between pb-5 border-b dark:border-gray-700 border-theme-gray-200">
         <div className="flex items-center gap-3">
           <div>
             <img src={logoUrl} className="rounded-full size-10" alt="" />
           </div>
           <div>
-            <h3 className="font-semibold leading-none uppercase text-secondary-500">
+            <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
               {symbol}
             </h3>
-            <span className="text-xs leading-none text-secondary-200">
+            <span className="text-xs leading-none dark:text-gray-200 text-secondary-200">
               {companyName}
             </span>
           </div>
         </div>
         <div>
-          <h2 className="text-sm font-medium text-secondary-300">
+          <h2 className="text-sm font-medium text-secondary-300 dark:text-white">
             ${parseFloat(price).toFixed(2)}
           </h2>
           <span

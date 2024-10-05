@@ -27,11 +27,9 @@ export default function Home() {
           />
         ))}
       </div>
-
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-12">
         <div className="space-y-6 sm:col-span-2 xl:col-span-8">
           <StockPriceChart />
-
           <TrendingStock />
         </div>
         <div className="sm:col-span-2 xl:col-span-4">

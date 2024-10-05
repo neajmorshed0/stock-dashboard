@@ -48,16 +48,16 @@ const StockCard = ({ symbol, companyName, logoUrl }) => {
           alt={`${companyName} logo`}
         />
         <div>
-          <h3 className="font-semibold leading-none uppercase text-secondary-500">
+          <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
             {symbol}
           </h3>
-          <span className="text-xs leading-none text-secondary-200">
+          <span className="text-xs leading-none dark:text-gray-300 text-secondary-200">
             {companyName}
           </span>
         </div>
       </div>
       <div className="flex items-center justify-between mt-6">
-        <h2 className="text-xl font-semibold text-secondary-500">
+        <h2 className="text-xl font-semibold dark:text-white text-secondary-500">
           ${parseFloat(price).toFixed(2)}
         </h2>
         <span
