@@ -51,7 +51,7 @@ export default function WatchList() {
   return (
     <Card>
       <div className="flex items-center justify-between pb-2">
-        <h2 className="text-lg font-semibold text-secondary-500">
+        <h2 className="text-lg font-semibold dark:text-white text-secondary-500">
           My Watchlist
         </h2>
         <div className="relative">
@@ -101,7 +101,7 @@ export default function WatchList() {
           </Menu>
         </div>
       </div>
-      <ul className="divide-y divide-theme-gray-200 h-[348px] overflow-y-auto mt-4 scrollbar scrollbar-thumb-theme-gray-200  scrollbar-track-secondary-500">
+      <ul className="divide-y divide-theme-gray-200 dark:divide-gray-600 h-[348px] overflow-y-auto mt-4 scrollbar scrollbar-thumb-theme-gray-200  scrollbar-track-secondary-500">
         {companies.map((company) => {
           const data = stockData[company.symbol];
           if (!data) return null;
@@ -127,7 +127,7 @@ export default function WatchList() {
                     <h3 className="font-semibold leading-none uppercase dark:text-white text-secondary-500">
                       {company.symbol}
                     </h3>
-                    <span className="text-xs leading-none dark:text-secondary-300 text-secondary-200">
+                    <span className="text-xs leading-none dark:text-gray-300 text-secondary-200">
                       {company.companyName}
                     </span>
                   </div>
